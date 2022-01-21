@@ -46,8 +46,13 @@ def Web_Login(args):
             print("【Login】{} 校园网登录失败，设备未连接网线或WIFI等！\n".format(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
     else:
         print("【Login】{} 设备已在线, 无需再次登录校园网~\n".format(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
-
-
+        
+def re_exe(cmd, inc=1):
+    while True:
+        os.system(cmd);
+        Web_Login(args)
+        time.sleep(inc)
+        
 if __name__ == "__main__":
     parse = argparse.ArgumentParser(description='Online_Login_Web')
     parse.add_argument('--test_web', default="https://www.baidu.com")
@@ -55,5 +60,5 @@ if __name__ == "__main__":
     parse.add_argument('--user_name', default=ahhhh)
     parse.add_argument('--password', default='23333')
     args = parse.parse_args()
-
-    Web_Login(args)
+    #Automatically execute login scripts at regular intervals(time interval=2mins)
+    re_exe("echo %time%", 120)
